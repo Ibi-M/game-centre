@@ -1,0 +1,507 @@
+import random
+import time
+
+
+class color:
+    PURPLE = '\033[95m'
+    CYAN = '\033[96m'
+    DARKCYAN = '\033[36m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+    
+    print ("Welcome to the Game Centre!")
+    
+def starting():
+    global choose
+    print ("")
+    print ("You have a choice of:")
+    print (" - Hangman (Type '1'")
+    print (" - Rock Paper Scissors (Type '2')")
+    print (" - Noughts & Crosses (Type '3')")
+    choose = int(input())
+
+
+
+    print ("")
+
+
+
+    if choose == 1:
+        def wrong1():
+            print (color.BOLD + "---------" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |" + color.END)
+            print (color.BOLD + "|" + color.END)
+            print (color.BOLD + "|" + color.END)
+            print (color.BOLD + "|" + color.END)
+            print (color.BOLD + "|" + color.END)
+
+        def wrong2():
+            print (color.BOLD + "---------" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       O" + color.END)
+            print (color.BOLD + "|" + color.END)
+            print (color.BOLD + "|" + color.END)
+            print (color.BOLD + "|" + color.END)
+
+        def wrong3():
+            print (color.BOLD + "---------" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       O" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       | " + color.END)
+            print (color.BOLD + "|" + color.END)
+            print (color.BOLD + "|" + color.END)
+
+        def wrong4():
+            print (color.BOLD + "---------" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       O" + color.END)
+            print (color.BOLD + "|" + color.RED+ "      /| " + color.END)
+            print (color.BOLD + "|" + color.END)
+            print (color.BOLD + "|" + color.END)
+
+        def wrong5():
+            print (color.BOLD + "---------" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       O" + color.END)
+            print (color.BOLD + "|" + color.RED+ "      /|\ " + color.END)
+            print (color.BOLD + "|" + color.END)
+            print (color.BOLD + "|" + color.END)
+
+
+        def wrong6():
+            print (color.BOLD + "---------" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       O" + color.END)
+            print (color.BOLD + "|" + color.RED+ "      /|\ " + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |  " + color.END)
+            print (color.BOLD + "|" + color.END)
+
+        def wrong7():
+            print (color.BOLD + "---------" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       O" + color.END)
+            print (color.BOLD + "|" + color.RED+ "      /|\ " + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |  " + color.END)
+            print (color.BOLD + "|" + color.RED+ "      /  " + color.END)
+
+        def wrong8():
+            print (color.BOLD + "---------" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |" + color.END)
+            print (color.BOLD + "|" + color.RED+ "       O" + color.END)
+            print (color.BOLD + "|" + color.RED+ "      /|\ " + color.END)
+            print (color.BOLD + "|" + color.RED+ "       |  " + color.END)
+            print (color.BOLD + "|" + color.RED+ "      / \ " + color.END)
+
+
+        print ("You are going to play Hangman...")
+        print ("")
+        list = ["remote", "toothpaste", "picture", "glass", "puddle", "truck", "ring", "fridge", "knife", "candle", "newspaper", "speakers", "lamp" ,"toothbrush","window","pants","clothes","blouse","button"]
+        word = random.choice(list)
+        used = []
+        so_far = ("-") * len(word) 
+        wrong = 0                 
+    
+        length = len(word)
+        dash = "-"
+        g_word = dash*length
+        guesses = 1
+        round = 0
+        max_guesses = 7
+    
+        print ("You are going to guess the following word: ")
+        print (g_word)
+        print ("")
+    
+        finish = False
+    
+        while finish == False:
+            round = round + 1
+            time.sleep(1)
+            print((color.YELLOW + color.BOLD + color.UNDERLINE) + "Guess:",round,"" + color.END)
+            print ("")
+            print ("Used Letters", used)
+            guess = input("Guess a letter: ")
+    
+    
+            while guess in used:
+                print("Choose another letter, you've already tried this letter...")
+                print(" ")
+                guess = input("Guess a letter")
+                print(" ")
+        
+            while guess.isdigit():
+                print ("Please enter a letter, not a number.")
+                print ("")
+                guess = input("Guess a letter")
+            
+            while guess.isupper():
+                print ("Please enter in lowercase, not Caps")
+                print ("")
+                guess = input("Guess a letter:")
+            
+            used.append(guess)  
+        
+            if guess in word:
+                print ("")
+                print ("Yes, that letter is in the word")
+                new = ""       
+            
+                for i in range (len(word)):
+                    if guess == word[i]:
+                        new = new + guess    
+                    else:
+                        new = new + so_far[i] 
+                so_far = new 
+            
+            else:
+                print ("")
+                print("Nope, that letter is not in the word")
+                wrong = wrong + 1
+    
+            print ("")
+            print (so_far)
+            print ("")
+            confirm = False
+            if wrong == 0:
+                wrong1()
+            elif wrong == 1:
+                wrong2()
+            elif wrong == 2:
+                wrong3()
+            elif wrong == 3:
+                wrong4()
+            elif wrong == 4:
+                wrong5()
+            elif wrong == 5:
+                wrong6()
+            elif wrong == 6:
+                wrong7()
+            elif wrong == 7:
+                wrong8()
+
+            time.sleep(1)
+            
+            print (color.CYAN + "--------------------------------------------------" + color.END)
+            print ("")
+            guesses = guesses + 1
+    
+            if wrong == 7:
+                print ("You have lost as you have guessed the maximum amount of letters that you're allowed to guess!")
+                finish = True
+                print ("")
+                print ("The word was", (color.BOLD + color.UNDERLINE + color.BLUE) + word + color.END)
+            
+            if so_far == word:
+                finish = True
+                left = max_guesses - guesses
+                if left <0:
+                    left = 0
+                print ("You have guessed the word correctly in", guesses, "guesses")
+
+
+
+
+    elif choose == 2:
+        print ("You are going to play Rock, Paper, Scissors with 3 rounds")
+    
+        rounds = 3
+        turns = ["first", "second", "final"]
+        no_turns = 0
+        win = 0
+    
+        while rounds != 0:
+    
+            fine = True
+    
+            print (" Input one of the following: (Only Input in CAPS")
+            print (" - 'R' for Rock")
+            print (" - 'P' for Paper")
+            print (" - 'S' for Scissors")
+            print ("")
+    
+            choice = ""
+            ok = False
+    
+            while ok != True:
+    
+                answer = input()
+        
+                if answer == "R":
+                    choice = "Rock"
+                    ok = True
+                elif answer == "P":
+                    choice = "Paper"
+                    ok = True
+            
+                elif answer == "S":
+                    choice = "Scissors"
+                    ok = True
+    
+                else:
+                    print ("You have entered an invalid input")
+                    ok = False
+            
+            options = ["Rock", "Paper", "Scissors"]
+    
+            index = random.randint(0,2)
+    
+            c_choice = options[index]
+            c_choice = c_choice.upper()
+    
+            print ("You chose ", choice)
+            print ("The computer chose...")
+            time.sleep(1)
+            print (c_choice)
+            print ("")
+            time.sleep(1)
+        
+            if answer == "R" and index == 0:
+                print ("You have chose the same as the computer")
+                print ("This will not count as a round")
+                fine = False
+                print ("--------------------------------------------------")
+                time.sleep(1)
+            
+            elif answer == "P" and index == 1:
+                print ("You have chose the same as the computer")
+                print ("This will not count as a round")
+                fine = False
+                print ("-----------------------------------------")
+                time.sleep(1)
+            
+            elif answer == "S" and index == 2:
+                print ("You have chose the same as the computer")
+                print ("This will not count as a round")
+                fine = False
+                print ("-----------------------------------------")
+                time.sleep(1)
+            
+    
+            if answer == "R" and index == 2:
+                print ("You have won the ", turns[no_turns],"round!")
+                win = win + 1
+                rounds = rounds - 1
+            
+            elif answer == "P" and index == 0:
+                print ("You have won the ", turns[no_turns],"round!")
+                win = win + 1
+                rounds = rounds - 1
+            
+            elif answer == "S" and index == 1:
+                print ("You have won the ", turns[no_turns],"round!")
+                win = win + 1
+                rounds = rounds - 1
+            
+            elif answer == "R" and index == 1:
+                print ("You have lost the ", turns[no_turns],"round!")
+                rounds = rounds - 1
+    
+            elif answer == "S" and index == 0:
+                print ("You have lost the ", turns[no_turns],"round!")
+                rounds = rounds - 1
+    
+            elif answer == "P" and index == 2:
+                print ("You have lost the ", turns[no_turns],"round!")
+                rounds = rounds - 1
+    
+            if no_turns == 3:
+                break
+            print ("")
+    
+            if fine != False and no_turns != 2:
+                no_turns = no_turns + 1
+                print ("Time for the next round!")
+                print ("-------------------------------------------------")
+                time.sleep(1)
+                print ("")
+    
+        if win == 0:
+            word = "rounds"
+        if win == 1:
+            word = "round"
+        elif win > 1:
+            word = "rounds"
+        
+        print ("")
+        time.sleep(1)
+        print ("The 3 rounds are finished, and you have won", win, word)
+        print ("")
+        if win > 1:
+            result = "won"
+        elif win <= 1:
+            result = "lost"
+        print ("Which means you have", result, "!")
+    
+#--------------------------------------------------------------------------------------------------------------------------------------    
+    elif choose == 3:
+        
+        game = [[".", ".", "."],
+                [".", ".", "."],
+                [".", ".", "."]]
+
+        stop = False
+
+    def turns():
+        print ((color.CYAN + color.BOLD), "   0 1 2", color.END)
+        print ((color.GREEN + color.BOLD), "0", color.END, game[0][0], game[0][1], game[0][2])
+        print ((color.GREEN + color.BOLD), "1", color.END, game[1][0], game[1][1], game[1][2])
+        print ((color.GREEN + color.BOLD), "2", color.END, game[2][0], game[2][1], game[2][2])
+
+    turns()
+    print ("")
+
+
+
+    p1 = color.RED + "O" + color.END
+    p2 = color.BLUE +"X" + color.END
+
+    def check1():
+        global confirm2
+        confirm2 = False
+        while confirm2 != True:
+            if game[row1][column1] != ".":
+                confirm2 = False
+                print ("You cannot do that move!")
+                print ("")
+                player1()
+            else:
+                confirm2 = True
+            
+
+    def check2():
+        global confirm2
+        confirm2 = False
+        while confirm2 != True:
+            if game[row2][column2] != ".":
+                confirm2 = False
+                print ("You cannot do that move!")
+                print ("")
+                player2()
+            else:
+                confirm2 = True
+            
+            
+    def player1():
+        global row1
+        global column1
+        print (stop)
+        print ("Player 1, Input your input")
+        row1 = int(input("What row would you want your input (0,1 or 2)?"))
+        column1 = int(input("What column would you want your input (0,1 or 2)?"))    
+        check1()
+        print ("")
+        game [row1][column1] = p1
+
+    def player2():
+        global row2
+        global column2
+        print (stop)
+        print ("Player 2, Input your input")
+        row2 = int(input("What row would you want your input (0,1 or 2)?"))
+        column2 = int(input("What column would you want your input (0,1 or 2)?"))
+        check2()
+        print ("")
+        game [row2][column2] = p2
+
+
+    def win():
+        global stop
+        if game[0][0] == p1 and game[0][1] == p1 and game[0][2] == p1:
+            stop = True
+        
+        elif game[1][0] == p1 and game[1][1] == p1 and game[1][2] == p1:
+            stop = True
+
+        elif game[2][0] == p1 and game[2][1] == p1 and game[2][2] == p1:
+            stop = True
+
+        elif game[0][0] == p1 and game[1][0] == p1 and game[2][0] == p1:
+            stop = True
+
+        elif game[0][1] == p1 and game[1][1] == p1 and game[2][1] == p1:
+            stop = True
+
+        elif game[0][2] == p1 and game[1][2] == p1 and game[2][2] == p1:
+            stop = True
+        
+        elif game[0][0] == p1 and game[1][1] == p1 and game[2][2] == p1:
+            stop = True
+        
+        elif game[0][2] == p1 and game[1][1] == p1 and game[2][0] == p1:
+            stop = True
+
+    
+        elif game[0][0] == p2 and game[0][1] == p2 and game[0][2] == p2:
+            stop = True
+            
+        elif game[1][0] == p2 and game[1][1] == p2 and game[1][2] == p2:
+            stop = True
+    
+        elif game[2][0] == p2 and game[2][1] == p2 and game[2][2] == p2:
+            stop = True
+
+        elif game[0][0] == p2 and game[1][0] == p2 and game[2][0] == p2:
+            stop = True
+
+        elif game[0][1] == p2 and game[1][1] == p2 and game[2][1] == p2:
+            stop = True
+
+        elif game[0][2] == p2 and game[1][2] == p2 and game[2][2] == p2:
+            stop = True
+        
+        elif game[0][0] == p2 and game[1][1] == p2 and game[2][2] == p2:
+            stop = True
+        
+        elif game[0][2] == p2 and game[1][1] == p2 and game[2][0] == p2:
+            stop = True
+        
+        else:
+            stop = False
+        
+        return stop   
+
+
+
+    while stop == False:
+        player1()
+        turns()
+        win()    
+        if stop == True:
+            print ("")
+            print ("You have won!")
+            break
+        else:
+            print ("")
+    
+        print ("")
+        player2()
+        turns()
+        win()
+        
+        if stop == True:
+            print ("")
+            print ("You have won!")
+            break
+        else:
+            print ("")
+    
+        print("")
+    
+    
+
+    print ("")
+    print (color.YELLOW, "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -", color.END)
+    print (" Thanks for playing with the GameCentre today!")
+    print ("Would you like to play more?")
+    cont = input("Input 'Y' for yes or 'N' for no: ")
+    
+    if cont == "Y":
+        starting()
+
+
+starting()
